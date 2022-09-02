@@ -25,7 +25,7 @@
                     <td>
                         <ul>
                             <li v-for="addon in order.addons">
-                                {{addon.addon_name}}
+                                {{addon.name}}
                             </li>
                         </ul>
                     </td>

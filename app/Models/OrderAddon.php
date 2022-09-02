@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Listing extends Model
+class OrderAddon extends Model
 {
     use HasFactory;
     protected $fillable = [
         'order_id',
-        'addon_name',
+        'addon_id',
     ];
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Addon;
-use App\Models\Order_addon;
 
 class AddonController extends Controller
 {
@@ -25,7 +24,7 @@ class AddonController extends Controller
      */
     public function create()
     {
-       return Order_addon::latest()->get();
+       //
     }
 
     /**
