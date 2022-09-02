@@ -1,9 +1,8 @@
 <template>
     <div class="col">
         <div class="card">
-            <h2>Ordered Pizza</h2>
+            <h2>Ordered Listing</h2>
             <hr>
-            <pre>{{ orderData }}</pre>
             <table>
                 <tr>
                     <th>Customer Name</th>
@@ -26,7 +25,7 @@
                     <td>
                         <ul>
                             <li v-for="addon in order.addons">
-                                {{addon.addon_id}}
+                                {{addon.addon_name}}
                             </li>
                         </ul>
                     </td>

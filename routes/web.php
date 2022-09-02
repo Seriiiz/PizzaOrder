@@ -19,4 +19,3 @@ Route::get('/orders', 'App\Http\Controllers\OrderController@create');
 Route::post('/store/orders', 'App\Http\Controllers\OrderController@store');
 
 Route::get('/addon', 'App\Http\Controllers\AddonController@index');
-Route::get('/show/addon', 'App\Http\Controllers\AddonController@create');

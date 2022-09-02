@@ -27,7 +27,7 @@
                     <legend>Addons</legend>
                     <ul>
                         <li v-for="addon in addonData">
-                            <input type="checkbox" name="addon" :value="addon.id" v-model="orders.addons">
+                            <input type="checkbox" name="addon" :value="addon.name" v-model="orders.addons">
                             <label>{{addon.name}}</label>
                         </li>
                     </ul>

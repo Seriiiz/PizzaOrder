@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Addon;
-use App\Models\Order_addon;
+use App\Models\Listing;
 
 class OrderController extends Controller
 {
@@ -40,9 +40,9 @@ class OrderController extends Controller
         $data = $request->all();
         $order = Order::create($data);
         foreach($request->addons as $addon){
-            $add =  new Order_addon;
+            $add =  new Listing;
             $add->order_id = $order->id;
-            $add->addon_id = $addon;
+            $add->addon_name = $addon;
             $add->save();
         }
         return response()->json([

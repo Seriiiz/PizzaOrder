@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Order_addon;
-use App\Models\Addon;
+use App\Models\Listing;
 
 class Order extends Model
 {
@@ -23,6 +22,6 @@ class Order extends Model
     ];
 
     public function addons(){
-        return $this->hasMany(Order_addon::class);
+        return $this->hasMany(Listing::class);
     }
 }

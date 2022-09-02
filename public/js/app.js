@@ -5391,7 +5391,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -28985,11 +28984,9 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col" }, [
     _c("div", { staticClass: "card" }, [
-      _c("h2", [_vm._v("Ordered Pizza")]),
+      _c("h2", [_vm._v("Ordered Listing")]),
       _vm._v(" "),
       _c("hr"),
-      _vm._v(" "),
-      _c("pre", [_vm._v(_vm._s(_vm.orderData))]),
       _vm._v(" "),
       _c(
         "table",
@@ -29017,7 +29014,7 @@ var render = function () {
                     return _c("li", [
                       _vm._v(
                         "\n                            " +
-                          _vm._s(addon.addon_id) +
+                          _vm._s(addon.addon_name) +
                           "\n                        "
                       ),
                     ])
@@ -29358,9 +29355,9 @@ var render = function () {
                     ],
                     attrs: { type: "checkbox", name: "addon" },
                     domProps: {
-                      value: addon.id,
+                      value: addon.name,
                       checked: Array.isArray(_vm.orders.addons)
-                        ? _vm._i(_vm.orders.addons, addon.id) > -1
+                        ? _vm._i(_vm.orders.addons, addon.name) > -1
                         : _vm.orders.addons,
                     },
                     on: {
@@ -29369,7 +29366,7 @@ var render = function () {
                           $$el = $event.target,
                           $$c = $$el.checked ? true : false
                         if (Array.isArray($$a)) {
-                          var $$v = addon.id,
+                          var $$v = addon.name,
                             $$i = _vm._i($$a, $$v)
                           if ($$el.checked) {
                             $$i < 0 &&
