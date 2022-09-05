@@ -14,6 +14,7 @@
                     <th>Addon</th>
                     <th>Delivery Time</th>
                     <th>Instruction</th>
+                    <th>Action</th>
                 </tr>
                 <tr v-for="order in orderData">
                     <td>{{order.customer_name}}</td>
@@ -31,6 +32,10 @@
                     </td>
                     <td>{{order.delivery_time}}</td>
                     <td>{{order.remarks}}</td>
+                    <td>
+                        <button @click="editOrder(orderData)">Edit</button><br><br>
+                        <button @click="deleteOrder(order.id)">Delete</button>
+                    </td>
                 </tr>
             </table>
         </div>        
@@ -54,7 +59,19 @@ export default{
         })
     },
     methods: {
-        //
+        deleteOrder(id){
+            axios.delete('/orders/' + id)
+            .then(response => {
+                alert('Order deleted');
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        editOrder(orderData){
+            console.log(orderData);
+        }
     }
 }
 </script>
@@ -74,10 +91,32 @@ tr:nth-child() {
     background-color: #dddddd;
 }
 
+ul{
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0;
+}
+
 .col {
     float: left;
     width: 63.33%;
     padding: 10px;
     height: auto;
+}
+.card{
+    border: 1px solid black;
+    padding: 20px;
+}
+.btn-primary{
+    background-color: blue;
+    border-color: white;
+    color: white;
+    padding: 5px;
+}
+.btn-danger{
+    background-color: red;
+    border-color: white;
+    color: white;
+    padding: 5px;
 }
 </style>

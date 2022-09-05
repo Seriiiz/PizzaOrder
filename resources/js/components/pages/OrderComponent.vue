@@ -59,7 +59,8 @@ export default{
                 remarks: '',
                 addons: [],
             },
-            addonData: []
+            addonData: [],
+            edit: false
         }
     },
     created(){
@@ -71,22 +72,37 @@ export default{
     },
     methods: {
         addToCart(){
-            axios.post('/store/orders', this.orders).then(
-                response => {
-                    console.log(response);
-                    alert('Order submitted');
-                },
-            )
-            .catch(error => {
-                console.log('Error');
-            })
+            if(this.edit === false){
+                axios.post('/store/orders', this.orders).then(
+                    response => {
+                        console.log(response);
+                        alert('Order submitted');
+                    },
+                )
+                .catch(error => {
+                    console.log('Error');
+                })
+            }
+            else{
+                //
+            }
         },
     }
 }
 </script>
 
-<style>
-ul {
+<style scoped>
+.card{
+    border: 1px solid black;
+    padding: 20px;
+}
+.col {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: auto;
+}
+ul{
     list-style-type: none;
     padding-left: 0;
 }

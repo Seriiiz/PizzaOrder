@@ -26,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return $orders = Order::with('addons')->get();
+        return Order::with('addons')->get();
     }
 
     /**
@@ -93,6 +93,15 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $addons = OrderAddon::where('order_id', $id)->get();
+        foreach($addons as $addon){
+            $rmOrderAddon = OrderAddon::find($addon->id);
+            $rmOrderAddon->delete();
+        }
+        $rmOrder = Order::find($id);
+        $rmOrder->delete();
+        return response()->json([
+            'status' => 'order deleted',
+        ], 200);
     }
 }
