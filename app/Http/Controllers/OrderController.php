@@ -37,18 +37,34 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $order = Order::create($data);
-        foreach($request->addons as $addon){
-            $add =  new OrderAddon;
-            $add->order_id = $order->id;
-            $add->addon_id = $addon;
-            $add->save();
+        if($request->isMethod('put')){
+            $data = $request->all();
+            return $data->id;
+            // $data = Order::find($request->id);
+            // $data->customer_name = $request->customer_name;
+            // $data->customer_contact = $request->customer_contact;
+            // $data->customer_email = $request->customer_email;
+            // $data->customer_address = $request->customer_address;
+            // $data->flavor = $request->flavor;
+            // $data->size = $request->size;
+            // $$data->delivery_time = $request->delivery_time;
+            // $data->remarks = $request->customer_name;
+            // return $data;
         }
-        return response()->json([
-            'status' => 'success',
-            'data' => $order
-        ], 200);
+        else{
+            $data = $request->all();
+            $order = Order::create($data);
+            foreach($request->addons as $addon){
+                $add =  new OrderAddon;
+                $add->order_id = $order->id;
+                $add->addon_id = $addon;
+                $add->save();
+            }
+            return response()->json([
+                'status' => 'Order added',
+                'data' => $order
+            ], 200);
+        }
     }
 
     /**
@@ -101,7 +117,7 @@ class OrderController extends Controller
         $rmOrder = Order::find($id);
         $rmOrder->delete();
         return response()->json([
-            'status' => 'order deleted',
+            'status' => 'Order deleted',
         ], 200);
     }
 }

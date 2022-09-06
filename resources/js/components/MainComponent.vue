@@ -1,18 +1,15 @@
 <template>
-    <div>
-        <order-component></order-component>
-        <cart-component></cart-component>
+    <div class="main-content">
+        <pizza-page></pizza-page>
     </div>
 </template>
 
 <script>
-import Order from './pages/OrderComponent.vue';
-import Cart from './pages/CartComponent.vue';
+import Pizza from './pages/PizzaPage.vue'
 
 export default{
     components: {
-        'order-component': Order,
-        'cart-component': Cart
+        'pizza-page': Pizza
     },
     data() {
         return{
@@ -24,3 +21,9 @@ export default{
     }
 }
 </script>
+
+<style>
+    .main-content{
+        background-color: white;
+    }
+</style>
