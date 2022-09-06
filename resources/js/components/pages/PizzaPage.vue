@@ -102,33 +102,43 @@ export default{
                 remarks: '',
                 addons: [],
             },
+            order_id: '',
             edit: false,
             addonData: [],
             orderData: [],
         }
     },
     created(){
-        var vm = this;
-        axios.get('/orders')
-        .then(function(data){
-            vm.orderData = data.data;
-        }),
-        axios.get('/addon')
-        .then(function(data){
-            vm.addonData = data.data;
-        })
+        this.fetchOrders();
+        this.fetchAddon();
     },
     methods: {
+        fetchOrders(){
+            var vm = this;
+            axios.get('/orders')
+            .then(function(data){
+                vm.orderData = data.data;
+            })
+        },
+        fetchAddon(){
+            var vm = this;
+            axios.get('/addon')
+            .then(function(data){
+                vm.addonData = data.data;
+            })
+        },
         addToCart(){
             if(this.edit === false){
                 axios.post('/store/orders', this.orders).then(
                     response => {
                         console.log(response);
                         alert('Order submitted');
+                        this.fetchOrders();
+                        this.clearForm();
                     },
                 )
                 .catch(error => {
-                    console.log('Error');
+                    console.log(error);
                 })
             }
             else{
@@ -136,10 +146,12 @@ export default{
                     response => {
                         console.log(response);
                         alert('Order updated');
+                        this.fetchOrders();
+                        this.clearForm();
                     },
                 )
                 .catch(error => {
-                    console.log('Error');
+                    console.log(error);
                 })
             }
         },
@@ -148,6 +160,7 @@ export default{
             .then(response => {
                 alert('Order deleted');
                 console.log(response);
+                this.fetchOrders();
             })
             .catch(error => {
                 console.log(error)
@@ -156,6 +169,7 @@ export default{
         editOrder(order){
             var vm = this;
             this.edit = true;
+            this.orders.order_id = order.id;
             this.orders.customer_name = order.customer_name;
             this.orders.customer_contact = order.customer_contact;
             this.orders.customer_email  = order.customer_email;
@@ -167,6 +181,19 @@ export default{
             order.addons.forEach(function(data, id){
                 vm.orders.addons.push(data.pivot.addon_id);
             });
+        },
+        clearForm(){
+            this.edit = false;
+            this.orders.order_id = null;
+            this.orders.customer_name = '';
+            this.orders.customer_contact = '';
+            this.orders.customer_email = '';
+            this.orders.customer_address = '';
+            this.orders.size = '';
+            this.orders.flavor = '';
+            this.orders.delivery_time = '';
+            this.orders.remarks = '';
+            this.orders.addons = [];
         }
     }
 }

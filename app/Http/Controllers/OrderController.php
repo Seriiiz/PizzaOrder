@@ -38,16 +38,31 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('put')){
-            $request->id = $request->input('id');
-            $request->customer_name = $request->input('customer_name');
-            $request->customer_contact = $request->input('customer_contact');
-            $request->customer_email = $request->input('customer_email');
-            $request->customer_address = $request->input('customer_address');
-            $request->flavor = $request->input('flavor');
-            $request->size = $request->input('size');
-            $request->delivery_time = $request->input('delivery_time');
-            $request->remarks = $request->input('customer_name');
-            return $request;
+            $findOrderAddon = OrderAddon::where('order_id', $request->order_id)->get();
+            foreach($findOrderAddon as $addon){
+                $rmExistingAddon = OrderAddon::find($addon->id);
+                $rmExistingAddon->delete();
+            }
+            $order = Order::with('addons')->find($request->order_id);
+            $order->customer_name = $request->input('customer_name');
+            $order->customer_contact = $request->input('customer_contact');
+            $order->customer_email = $request->input('customer_email');
+            $order->customer_address = $request->input('customer_address');
+            $order->flavor = $request->input('flavor');
+            $order->size = $request->input('size');
+            $order->delivery_time = $request->input('delivery_time');
+            $order->remarks = $request->input('customer_name');
+            foreach($request->addons as $newAddon){
+                $addNewAddon = new OrderAddon;
+                $addNewAddon->order_id = $order->id;
+                $addNewAddon->addon_id = $newAddon;
+                $addNewAddon->save();
+            }
+            $order->save();
+            return response()->json([
+                'status' => 'Order updated',
+                'data' => $order
+            ], 200);
         }
         else{
             $data = $request->all();

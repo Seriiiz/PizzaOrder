@@ -5449,41 +5449,64 @@ __webpack_require__.r(__webpack_exports__);
         remarks: '',
         addons: []
       },
+      order_id: '',
       edit: false,
       addonData: [],
       orderData: []
     };
   },
   created: function created() {
-    var vm = this;
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/orders').then(function (data) {
-      vm.orderData = data.data;
-    }), axios__WEBPACK_IMPORTED_MODULE_0___default().get('/addon').then(function (data) {
-      vm.addonData = data.data;
-    });
+    this.fetchOrders();
+    this.fetchAddon();
   },
   methods: {
+    fetchOrders: function fetchOrders() {
+      var vm = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/orders').then(function (data) {
+        vm.orderData = data.data;
+      });
+    },
+    fetchAddon: function fetchAddon() {
+      var vm = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/addon').then(function (data) {
+        vm.addonData = data.data;
+      });
+    },
     addToCart: function addToCart() {
+      var _this = this;
+
       if (this.edit === false) {
         axios__WEBPACK_IMPORTED_MODULE_0___default().post('/store/orders', this.orders).then(function (response) {
           console.log(response);
           alert('Order submitted');
+
+          _this.fetchOrders();
+
+          _this.clearForm();
         })["catch"](function (error) {
-          console.log('Error');
+          console.log(error);
         });
       } else {
         axios__WEBPACK_IMPORTED_MODULE_0___default().put('/store/orders', this.orders).then(function (response) {
           console.log(response);
           alert('Order updated');
+
+          _this.fetchOrders();
+
+          _this.clearForm();
         })["catch"](function (error) {
-          console.log('Error');
+          console.log(error);
         });
       }
     },
     deleteOrder: function deleteOrder(id) {
+      var _this2 = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/orders/' + id).then(function (response) {
         alert('Order deleted');
         console.log(response);
+
+        _this2.fetchOrders();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -5491,6 +5514,7 @@ __webpack_require__.r(__webpack_exports__);
     editOrder: function editOrder(order) {
       var vm = this;
       this.edit = true;
+      this.orders.order_id = order.id;
       this.orders.customer_name = order.customer_name;
       this.orders.customer_contact = order.customer_contact;
       this.orders.customer_email = order.customer_email;
@@ -5502,6 +5526,19 @@ __webpack_require__.r(__webpack_exports__);
       order.addons.forEach(function (data, id) {
         vm.orders.addons.push(data.pivot.addon_id);
       });
+    },
+    clearForm: function clearForm() {
+      this.edit = false;
+      this.orders.order_id = null;
+      this.orders.customer_name = '';
+      this.orders.customer_contact = '';
+      this.orders.customer_email = '';
+      this.orders.customer_address = '';
+      this.orders.size = '';
+      this.orders.flavor = '';
+      this.orders.delivery_time = '';
+      this.orders.remarks = '';
+      this.orders.addons = [];
     }
   }
 });
