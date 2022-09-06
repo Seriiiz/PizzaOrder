@@ -5,21 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Laravel</title>
     </head>
-    <style>
-        .container{
-            padding: 10px;
-        }
-        .card{
-            border-style:solid;
-            padding: 20px;
-        }
-        .col {
-            float: left;
-            width: 33.33%;
-            padding: 10px;
-            height: auto;
-        }
-    </style>
     <body>
         <div id="app">
             <main-component></main-component>

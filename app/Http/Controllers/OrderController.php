@@ -38,7 +38,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('put')){
-            // $order = Order::find($request->id);
             $request->id = $request->input('id');
             $request->customer_name = $request->input('customer_name');
             $request->customer_contact = $request->input('customer_contact');
