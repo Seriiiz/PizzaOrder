@@ -71,7 +71,7 @@
                         <td>{{order.flavor}}</td>
                         <td>{{order.size}}</td>
                         <td>
-                            <ul style="margin: 0;">
+                            <ul style="margin: 0; padding-left: 20px;">
                                 <li v-for="addon in order.addons">
                                     {{addon.name}}
                                 </li>
@@ -82,11 +82,12 @@
                         <td>
                             <button @click="editOrder(order)">Edit</button><br><br>
                             <button @click="deleteOrder(order.id)">Delete</button>
+                            <!-- <button @click="$emit('open-modal')">Delete</button> -->
                         </td>
                     </tr>
                 </table>
             </div>        
-        </div>        
+        </div>    
     </div>
 </template>
 
@@ -111,7 +112,7 @@ export default{
             order_id: '',
             edit: false,
             addonData: [],
-            orderData: [],
+            orderData: []
         }
     },
     created(){
@@ -125,6 +126,9 @@ export default{
             .then(function(data){
                 vm.orderData = data.data;
             })
+            .catch(error => {
+                console.log(error);
+            })
         },
         fetchAddon(){
             var vm = this;
@@ -135,27 +139,24 @@ export default{
         },
         addToCart(){
             if(this.edit === false){
-                axios.post('/store/orders', this.orders).then(
-                    response => {
-                        console.log(response);
-                        alert('Order submitted');
-                        this.fetchOrders();
-                        this.clearForm();
-                    },
-                )
+                axios.post('/store/orders', this.orders)
+                .then(response => {
+                    alert('Order submitted');
+                    this.orderData.push(response.data.data);
+                    this.clearForm();
+                })
                 .catch(error => {
                     console.log(error);
                 })
             }
             else{
-                axios.put('/store/orders', this.orders).then(
-                    response => {
-                        console.log(response);
-                        alert('Order updated');
-                        this.fetchOrders();
-                        this.clearForm();
-                    },
-                )
+                axios.put('/store/orders', this.orders)
+                .then(response => {
+                    console.log(response);
+                    alert('Order updated');
+                    this.fetchOrders();
+                    this.clearForm();
+                })
                 .catch(error => {
                     console.log(error);
                 })
@@ -184,7 +185,8 @@ export default{
             this.orders.flavor = order.flavor;
             this.orders.delivery_time = order.delivery_time;
             this.orders.remarks = order.remarks;
-            order.addons.forEach(function(data, id){
+            this.orders.addons = [];
+            order.addons.forEach(function(data){
                 vm.orders.addons.push(data.pivot.addon_id);
             });
         },
@@ -201,6 +203,7 @@ export default{
             this.orders.remarks = '';
             this.orders.addons = [];
         }
+
     }
 }
 </script>
@@ -224,26 +227,12 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-
 td, th {
     border: 1px solid #ddd;
     text-align: left;
     padding: 8px;
 }
-
 tr:nth-child() {
     background-color: #dddddd;
-}
-.btn-primary{
-    background-color: blue;
-    border-color: white;
-    color: white;
-    padding: 5px;
-}
-.btn-danger{
-    background-color: red;
-    border-color: white;
-    color: white;
-    padding: 5px;
 }
 </style>

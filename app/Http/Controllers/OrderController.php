@@ -73,9 +73,10 @@ class OrderController extends Controller
                 $add->addon_id = $addon;
                 $add->save();
             }
+            $newData = Order::with('addons')->orderBy('created_at', 'desc')->first();
             return response()->json([
                 'status' => 'Order added',
-                'data' => $order
+                'data' => $newData
             ], 200);
         }
     }
