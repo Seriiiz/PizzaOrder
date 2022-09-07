@@ -29019,7 +29019,7 @@ var render = function () {
             _c("br"),
             _c("br"),
             _vm._v(" "),
-            _c("label", [_vm._v("Email address:")]),
+            _c("label", [_vm._v("Email:")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -29382,6 +29382,7 @@ var render = function () {
                 _c("td", [
                   _c(
                     "ul",
+                    { staticStyle: { margin: "0" } },
                     _vm._l(order.addons, function (addon) {
                       return _c("li", [
                         _vm._v(

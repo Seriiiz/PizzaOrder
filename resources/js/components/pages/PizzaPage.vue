@@ -8,7 +8,7 @@
                     <input type="text" v-model="orders.customer_name" required/><br><br>
                     <label>Telephone:</label>
                     <input type="number" v-model="orders.customer_contact" required/><br><br>
-                    <label>Email address:</label>
+                    <label>Email:</label>
                     <input type="email" v-model="orders.customer_email" required/><br><br>
                     <label>Address:</label>
                     <input type="text" v-model="orders.customer_address" required/><br><br>
@@ -71,7 +71,7 @@
                         <td>{{order.flavor}}</td>
                         <td>{{order.size}}</td>
                         <td>
-                            <ul>
+                            <ul style="margin: 0;">
                                 <li v-for="addon in order.addons">
                                     {{addon.name}}
                                 </li>
