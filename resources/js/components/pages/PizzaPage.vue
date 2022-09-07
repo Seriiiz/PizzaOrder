@@ -26,7 +26,7 @@
                     </fieldset><br>
                     <fieldset>
                         <legend>Addons</legend>
-                        <ul>
+                        <ul style="list-style-type: none; overflow: hidden; margin: 0; padding-left: 0;">
                             <li v-for="addon in addonData">
                                 <input type="checkbox" name="addon" :value="addon.id" v-model="orders.addons">
                                 <label>{{addon.name}}</label>
@@ -37,7 +37,13 @@
                     <input type="time" v-model="orders.delivery_time" required/><br><br>
                     <label>Delivery instruction:</label>
                     <textarea v-model="orders.remarks" required></textarea><br><br>
-                    <button type="submit">Submit</button>
+                    <div v-if="edit === false">
+                        <button type="submit">Add</button>
+                    </div>
+                    <div v-else>
+                        <button type="submit">Update</button>
+                        <button type="submit" @click.prevent="clearForm()">Cancel</button>
+                    </div>
                 </form>
             </div> 
         </div>
@@ -227,12 +233,6 @@ td, th {
 
 tr:nth-child() {
     background-color: #dddddd;
-}
-ul{
-    list-style-type: none;
-    overflow: hidden;
-    margin: 0;
-    padding-left: 0;
 }
 .btn-primary{
     background-color: blue;

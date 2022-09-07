@@ -5434,6 +5434,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -10891,7 +10897,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-cee385de]{\r\n    display: flex;\r\n    flex-wrap: nowrap;\r\n    width: 100%;\n}\n.card[data-v-cee385de]{\r\n    border: 1px solid black;\r\n    padding: 20px;\n}\n.col[data-v-cee385de] {\r\n    float: left;\r\n    padding: 10px;\r\n    height: auto;\n}\ntable[data-v-cee385de] {\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\ntd[data-v-cee385de], th[data-v-cee385de] {\r\n    border: 1px solid #ddd;\r\n    text-align: left;\r\n    padding: 8px;\n}\ntr[data-v-cee385de]:nth-child() {\r\n    background-color: #dddddd;\n}\nul[data-v-cee385de]{\r\n    list-style-type: none;\r\n    overflow: hidden;\r\n    margin: 0;\r\n    padding-left: 0;\n}\n.btn-primary[data-v-cee385de]{\r\n    background-color: blue;\r\n    border-color: white;\r\n    color: white;\r\n    padding: 5px;\n}\n.btn-danger[data-v-cee385de]{\r\n    background-color: red;\r\n    border-color: white;\r\n    color: white;\r\n    padding: 5px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-cee385de]{\r\n    display: flex;\r\n    flex-wrap: nowrap;\r\n    width: 100%;\n}\n.card[data-v-cee385de]{\r\n    border: 1px solid black;\r\n    padding: 20px;\n}\n.col[data-v-cee385de] {\r\n    float: left;\r\n    padding: 10px;\r\n    height: auto;\n}\ntable[data-v-cee385de] {\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\ntd[data-v-cee385de], th[data-v-cee385de] {\r\n    border: 1px solid #ddd;\r\n    text-align: left;\r\n    padding: 8px;\n}\ntr[data-v-cee385de]:nth-child() {\r\n    background-color: #dddddd;\n}\n.btn-primary[data-v-cee385de]{\r\n    background-color: blue;\r\n    border-color: white;\r\n    color: white;\r\n    padding: 5px;\n}\n.btn-danger[data-v-cee385de]{\r\n    background-color: red;\r\n    border-color: white;\r\n    color: white;\r\n    padding: 5px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -29208,6 +29214,14 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "ul",
+                {
+                  staticStyle: {
+                    "list-style-type": "none",
+                    overflow: "hidden",
+                    margin: "0",
+                    "padding-left": "0",
+                  },
+                },
                 _vm._l(_vm.addonData, function (addon) {
                   return _c("li", [
                     _c("input", {
@@ -29314,7 +29328,29 @@ var render = function () {
             _c("br"),
             _c("br"),
             _vm._v(" "),
-            _c("button", { attrs: { type: "submit" } }, [_vm._v("Submit")]),
+            _vm.edit === false
+              ? _c("div", [
+                  _c("button", { attrs: { type: "submit" } }, [_vm._v("Add")]),
+                ])
+              : _c("div", [
+                  _c("button", { attrs: { type: "submit" } }, [
+                    _vm._v("Update"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      attrs: { type: "submit" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.clearForm()
+                        },
+                      },
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                ]),
           ]
         ),
       ]),
