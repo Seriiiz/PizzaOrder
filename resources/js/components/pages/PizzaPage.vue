@@ -81,8 +81,8 @@
                         <td>{{order.remarks}}</td>
                         <td>
                             <button @click="editOrder(order)">Edit</button><br><br>
-                            <button @click="deleteOrder(order.id)">Delete</button>
-                            <!-- <button @click="$emit('open-modal')">Delete</button> -->
+                            <button @click="confirmDelete = true">Delete</button>
+                            <confirm-modal v-show="confirmDelete" @close-modal="confirmDelete = false" @confirm-modal="deleteOrder(order.id)"></confirm-modal>
                         </td>
                     </tr>
                 </table>
@@ -94,8 +94,12 @@
 <script>
 
 import axios from 'axios';
+import Modal from '../modals/ModalComponent'
 
 export default{
+    components:{
+        'confirm-modal': Modal
+    },
     data() {
         return{
             orders:{
@@ -112,7 +116,8 @@ export default{
             order_id: '',
             edit: false,
             addonData: [],
-            orderData: []
+            orderData: [],
+            confirmDelete: false
         }
     },
     created(){
@@ -165,8 +170,8 @@ export default{
         deleteOrder(id){
             axios.delete('/orders/' + id)
             .then(response => {
-                alert('Order deleted');
                 console.log(response);
+                this.confirmDelete = false;
                 this.fetchOrders();
             })
             .catch(error => {
