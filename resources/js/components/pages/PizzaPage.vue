@@ -50,6 +50,19 @@
         <div class="col">
             <div class="card">
                 <h2>Ordered Listing</h2>
+                <pre>{{paginations}}</pre>
+                <div class="pagination">
+                    <a v-bind:class="[{disabled: !paginations.prev_page_url}]" @click="fetchOrders(paginations.prev_page_url)"><b>Previous</b></a>
+                    <a disabled>Page {{ paginations.current_page }} of {{ paginations.last_page }}</a>
+                    <a v-bind:class="[{disabled: !paginations.next_page_url}]" @click="fetchOrders(paginations.next_page_url)"><b>Next</b></a>
+                </div>
+                <!-- <ul class="pagination">
+                    <li v-bind:class="[{disabled: !paginations.prev_page_url}]"><a class="page-link" href="#" @click="fetchOrders(paginations.prev_page_url)">Previous</a></li>
+
+                    <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ paginations.current_page }} of {{ paginations.last_page }}</a></li>
+                
+                    <li v-bind:class="[{disabled: !paginations.next_page_url}]"><a class="page-link" href="#" @click="fetchOrders(paginations.next_page_url)">Next</a></li>
+                </ul> -->
                 <table>
                     <tr>
                         <th>Customer Name</th>
@@ -117,7 +130,8 @@ export default{
             edit: false,
             addonData: [],
             orderData: [],
-            confirmDelete: false
+            confirmDelete: false,
+            paginations: {}
         }
     },
     created(){
@@ -125,15 +139,26 @@ export default{
         this.fetchAddon();
     },
     methods: {
-        fetchOrders(){
+        fetchOrders(pageId){
             var vm = this;
-            axios.get('/orders')
-            .then(function(data){
-                vm.orderData = data.data;
+            let page_url = pageId || '/orders'
+            axios.get(page_url)
+            .then(res => {
+                vm.orderData = res.data.data;
+                vm.makePagination(res);
             })
             .catch(error => {
                 console.log(error);
             })
+        },
+        makePagination(res) {
+            let pagination = {
+                current_page: res.data.current_page,
+                last_page: res.data.last_page,
+                next_page_url: res.data.next_page_url,
+                prev_page_url: res.data.prev_page_url
+            };
+            this.paginations = pagination;
         },
         fetchAddon(){
             var vm = this;
@@ -239,5 +264,19 @@ td, th {
 }
 tr:nth-child() {
     background-color: #dddddd;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+a:disabled{
+    background-color: #ccc;
 }
 </style>

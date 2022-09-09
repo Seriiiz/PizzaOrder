@@ -26,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return Order::with('addons')->get();
+        return Order::with('addons')->orderBy('created_at', 'desc')->paginate(5);
     }
 
     /**
