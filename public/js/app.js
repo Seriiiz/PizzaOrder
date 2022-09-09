@@ -5564,9 +5564,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteOrder: function deleteOrder(id) {
       var _this2 = this;
 
+      console.log(id);
       axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/orders/' + id).then(function (response) {
         console.log(response);
         _this2.confirmDelete = false;
+        _this2.order_id = '';
 
         _this2.fetchOrders();
       })["catch"](function (error) {
@@ -29749,7 +29751,8 @@ var render = function () {
                       {
                         on: {
                           click: function ($event) {
-                            _vm.confirmDelete = true
+                            ;(_vm.confirmDelete = true),
+                              (_vm.order_id = order.id)
                           },
                         },
                       },
@@ -29767,10 +29770,10 @@ var render = function () {
                       ],
                       on: {
                         "close-modal": function ($event) {
-                          _vm.confirmDelete = false
+                          ;(_vm.confirmDelete = false), (_vm.order_id = "")
                         },
                         "confirm-modal": function ($event) {
-                          return _vm.deleteOrder(order.id)
+                          return _vm.deleteOrder(_vm.order_id)
                         },
                       },
                     }),

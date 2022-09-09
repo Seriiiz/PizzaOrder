@@ -86,8 +86,8 @@
                         <td>{{order.remarks}}</td>
                         <td>
                             <button @click="editOrder(order)">Edit</button><br><br>
-                            <button @click="confirmDelete = true">Delete</button>
-                            <confirm-modal v-show="confirmDelete" @close-modal="confirmDelete = false" @confirm-modal="deleteOrder(order.id)"></confirm-modal>
+                            <button @click="confirmDelete = true, order_id = order.id">Delete</button>
+                            <confirm-modal v-show="confirmDelete" @close-modal="confirmDelete = false, order_id = ''" @confirm-modal="deleteOrder(order_id)"></confirm-modal>
                         </td>
                     </tr>
                 </table>
@@ -185,10 +185,12 @@ export default{
             }
         },
         deleteOrder(id){
+            console.log(id);
             axios.delete('/orders/' + id)
             .then(response => {
                 console.log(response);
                 this.confirmDelete = false;
+                this.order_id = '';
                 this.fetchOrders();
             })
             .catch(error => {
@@ -225,7 +227,6 @@ export default{
             this.orders.remarks = '';
             this.orders.addons = [];
         }
-
     }
 }
 </script>

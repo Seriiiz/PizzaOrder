@@ -1,20 +1,20 @@
 <template>
     <transition name="modal-fade">
         <div class="modal-overlay" @click="$emit('close-modal')">
-        <div class="modal" @click.stop>
-            <h6>Delete Order</h6>
-            <p>Are you sure?</p>
-            <button @click="$emit('confirm-modal')">Confirm</button>
-            <button @click="$emit('close-modal')">Cancel</button>
-        </div>
+            <div class="modal" @click.stop>
+                <h6>Delete Order</h6>
+                <p>Are you sure?</p>
+                <button @click="$emit('confirm-modal')">Confirm</button>
+                <button @click="$emit('close-modal')">Cancel</button>
+            </div>
         </div>
     </transition>
 </template>
 
 <script>
-    export default{
-        //
-    }
+export default{
+    //
+}
 </script>
 
 <style scoped>
