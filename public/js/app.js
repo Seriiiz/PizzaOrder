@@ -5478,14 +5478,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -29657,8 +29649,6 @@ var render = function () {
     _c("div", { staticClass: "col" }, [
       _c("div", { staticClass: "card" }, [
         _c("h2", [_vm._v("Ordered Listing")]),
-        _vm._v(" "),
-        _c("pre", [_vm._v(_vm._s(_vm.paginations))]),
         _vm._v(" "),
         _c("div", { staticClass: "pagination" }, [
           _c(

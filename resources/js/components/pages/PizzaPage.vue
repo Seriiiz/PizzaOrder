@@ -50,19 +50,11 @@
         <div class="col">
             <div class="card">
                 <h2>Ordered Listing</h2>
-                <pre>{{paginations}}</pre>
                 <div class="pagination">
                     <a v-bind:class="[{disabled: !paginations.prev_page_url}]" @click="fetchOrders(paginations.prev_page_url)"><b>Previous</b></a>
                     <a disabled>Page {{ paginations.current_page }} of {{ paginations.last_page }}</a>
                     <a v-bind:class="[{disabled: !paginations.next_page_url}]" @click="fetchOrders(paginations.next_page_url)"><b>Next</b></a>
                 </div>
-                <!-- <ul class="pagination">
-                    <li v-bind:class="[{disabled: !paginations.prev_page_url}]"><a class="page-link" href="#" @click="fetchOrders(paginations.prev_page_url)">Previous</a></li>
-
-                    <li class="page-item disabled"><a class="page-link text-dark" href="#">Page {{ paginations.current_page }} of {{ paginations.last_page }}</a></li>
-                
-                    <li v-bind:class="[{disabled: !paginations.next_page_url}]"><a class="page-link" href="#" @click="fetchOrders(paginations.next_page_url)">Next</a></li>
-                </ul> -->
                 <table>
                     <tr>
                         <th>Customer Name</th>
