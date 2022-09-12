@@ -5533,6 +5533,8 @@ __webpack_require__.r(__webpack_exports__);
       var vm = this;
       axios__WEBPACK_IMPORTED_MODULE_0___default().get('/addon').then(function (data) {
         vm.addonData = data.data;
+      })["catch"](function (error) {
+        console.log(error);
       });
     },
     addToCart: function addToCart() {
@@ -10980,7 +10982,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-cee385de]{\r\n    display: flex;\r\n    flex-wrap: nowrap;\r\n    width: 100%;\n}\n.card[data-v-cee385de]{\r\n    border: 1px solid black;\r\n    padding: 20px;\n}\n.col[data-v-cee385de] {\r\n    float: left;\r\n    padding: 10px;\r\n    height: auto;\n}\ntable[data-v-cee385de] {\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\ntd[data-v-cee385de], th[data-v-cee385de] {\r\n    border: 1px solid #ddd;\r\n    text-align: left;\r\n    padding: 8px;\n}\ntr[data-v-cee385de]:nth-child() {\r\n    background-color: #dddddd;\n}\n.pagination a[data-v-cee385de] {\r\n    color: black;\r\n    float: left;\r\n    padding: 8px 16px;\r\n    text-decoration: none;\r\n    transition: background-color .3s;\r\n    border: 1px solid #ddd;\n}\n.pagination a[data-v-cee385de]:hover:not(.active) {\r\n    background-color: #ddd;\n}\na[data-v-cee385de]:disabled{\r\n    background-color: #ccc;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-cee385de]{\r\n    display: flex;\r\n    flex-wrap: nowrap;\r\n    width: 100%;\n}\n.card[data-v-cee385de]{\r\n    border: 1px solid black;\r\n    padding: 20px;\n}\n.col[data-v-cee385de] {\r\n    float: left;\r\n    padding: 10px;\r\n    height: auto;\n}\ntable[data-v-cee385de] {\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\ntd[data-v-cee385de], th[data-v-cee385de] {\r\n    border: 1px solid #ddd;\r\n    text-align: left;\r\n    padding: 8px;\n}\ntr[data-v-cee385de]:nth-child() {\r\n    background-color: #dddddd;\n}\n.pagination a[data-v-cee385de] {\r\n    color: black;\r\n    float: left;\r\n    padding: 8px 16px;\r\n    text-decoration: none;\r\n    transition: background-color .3s;\r\n    border: 1px solid #ddd;\n}\n.pagination a[data-v-cee385de]:hover:not(.active) {\r\n    background-color: #ddd;\n}\n.disabled[data-v-cee385de]{\r\n    pointer-events: none;\r\n    background-color: #ccc;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

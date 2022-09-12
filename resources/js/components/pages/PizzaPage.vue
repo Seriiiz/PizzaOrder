@@ -158,6 +158,9 @@ export default{
             .then(function(data){
                 vm.addonData = data.data;
             })
+            .catch(error => {
+                console.log(error);
+            })
         },
         addToCart(){
             if(this.edit === false){
@@ -269,7 +272,8 @@ tr:nth-child() {
 .pagination a:hover:not(.active) {
     background-color: #ddd;
 }
-a:disabled{
+.disabled{
+    pointer-events: none;
     background-color: #ccc;
 }
 </style>
